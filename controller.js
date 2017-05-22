@@ -15,7 +15,7 @@ menuModule.controller('menuListCtrl', function($scope){
 	}
 	
 	$scope.ratioChanged = function(){
-		var parentDiv = angular.element(document.querySelector('#parent'));
+		var parentDiv = angular.element(document.querySelector('#menu')).parent().parent();
 		$scope.squareSide = Math.min(parentDiv[0].offsetHeight, parentDiv[0].offsetWidth)*$scope.ratio;
 	}
 	
@@ -24,6 +24,6 @@ menuModule.controller('menuListCtrl', function($scope){
 
 menuModule.directive('menuDirective', function(){
 	return{
-		template:'<center><div style="height:{{squareSide}}px; width:{{squareSide}}px"><p><input type="button" ng-repeat="menu in menus" ng-class="{\'blue margin-button\':currentImage==menu.url, \'black margin-button\':currentImage!=menu.url}" ng-click="changeImage(menu.url)" value="{{menu.name}}"></p><p><img ng-src="{{currentImage}}" style="width:{{squareSide}}px"></p><input type="text" value="{{ratio}}" ng-model="ratio" ng-change="ratioChanged()"></div></center>'
+		template:'<div id="menu" style="height:{{squareSide}}px; width:{{squareSide}}px"><p><input type="button" ng-repeat="menu in menus" ng-class="{\'blue margin-button\':currentImage==menu.url, \'black margin-button\':currentImage!=menu.url}" ng-click="changeImage(menu.url)" value="{{menu.name}}"></p><p><img ng-src="{{currentImage}}" style="width:{{squareSide}}px"></p><input type="text" value="{{ratio}}" ng-model="ratio" ng-change="ratioChanged()"></div>'
 	};
 });
